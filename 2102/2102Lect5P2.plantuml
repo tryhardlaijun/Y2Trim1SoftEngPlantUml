@@ -1,0 +1,161 @@
+@startmindmap
+<style>
+mindmapDiagram {
+  rootNode  {
+    BackgroundColor lightGreen
+  }
+  boxless {
+    FontColor darkgreen
+  }
+  leafNode {
+    BackgroundColor lightBlue
+  }
+}
+</style>
+
+* Herusitic 
+** 1. Visibility
+*** How easily a system state\n is seen or reflected
+**** example
+***** Loading
+***** Has task been completed?
+***** storage space
+***** Is there coins
+
+** 2. Farmiliar Metaphors & Language
+*** Matching mental model
+*** Farmiliar metaphor and languages
+*** Should follow real world Conventions
+
+** 3.User control and freedom
+*** undo, explore and change choices
+*** Multiple way to the same things
+*** Allow recovery for mistakes
+
+** 4. Consistency
+*** Layout consistency
+*** Same terminology used
+*** Same structure on all webpage
+
+** 5. Error Prevention
+*** Prevent data loss
+**** Warn when doing something big
+*** Prevent Bad input
+**** numberpad if only numbers are allowed
+
+** 6. Recognition > Recall
+*** Object easily visible and retrievable
+**** rm -rf (Recall)
+**** trash can or x button to delete is recognition.
+*** Most know are in the world not your head.
+*** Use less cognitive load on the user.
+
+** 7. flexibility and efficiency
+*** Shortcuts and gestures to speed process up
+**** Keyboard shortcuts.
+**** Recommendations for things.
+*** Macros to allow users to do frequently done things.
+
+** 8. aesthetic and minimalist design.
+*** Clean and uncluttered interface.
+*** Remove useless info.
+**** Helps prevent error
+*** Only have whats useful in that scenario.
+
+** 9. Recognize diagnose and recover from error
+*** State problem tell how to fix and give example.
+*** Example:
+**** Highlight missing information from form. Tell the user what they need to do
+
+** 10. Help and documentation
+*** Provide info on what to do next.
+*** Provides more info to clarify.
+*** Ensure documentation is easy to search
+*** List of concrete steps.
+*** May not be needed, if UI is intuitive then it isn't needed.
+
+* Herusitic vs User Testing.
+** Often times faster ( 1 - 2 hours ) / evaluator.
+** Herusitic evaluation are often more understandable by a developer \nas user may not be able to convey their\n thoughts and feelings properly
+** Sometimes users testing may be more accurate \nas they could tell you what issue they face.
+*** Account for user conduct
+*** Herusitic may miss problem or have false positive
+
+* Cognitive walkthrough
+** Assess learnability and usability through simulation of the way user/n would explore and be farmiliar with interactive system.
+** HCI expert walk through task and ask question from prespective of user.
+** Usability "though experiment"
+*** Look at UI and make predictions.
+** Steps:
+*** Construct task from system spec or screen mockup.
+*** Walk through activities required to complete task.
+*** Review each action needed and predict how user would behave \n and problems they may face.
+**** Understanding of user.
+**** Descript user and their background
+**** Descript task.
+**** Complete list of actions required
+**** Prototype or description of system.
+
+** Assumptions
+*** User has rough plan.
+*** Would look for action.
+*** select best action.
+*** Usesr interprets response and assess if action helped progress wth task.
+
+** 4 QUestions
+*** Would user try to produce effect.
+**** Identify user expectation.
+**** Evidence.
+***** Part of their original task.
+***** They have exp using the system.
+***** System tell them to do it.
+*** WOuld they notice correct action.
+**** Look for hidden button or check for visiblity.
+**** Perceivable representation of an action.
+*** Would the user know if the action is the correct one.
+**** All other option looks wrong.
+**** Visual item that user that clicks with the users.
+*** User understand feedback
+**** Recognize connection between sysem and user task.
+
+* DECIDE EVALUATION FRAMEWORK 
+** Used for planning an evaluation study.
+** Determine aims and goals
+*** Whos and Whys.
+*** Find out aims and goals.
+*** Examples:
+**** check if metaphor can be improved.
+**** Check if interface is consistent.
+
+** Explore the question.
+*** ensure questions asked are related to goal.
+*** Example:
+**** What are the customers attitude to interface.
+
+** Choose technique and paradigm.
+*** Choose needing finding ways to get feedback.
+*** Example:
+**** Field study do not involving testing and modeling.
+
+** Identify practical issue.
+*** Select users.
+*** Stay on budget.
+*** Staying on schedule.
+*** Find evaluators.
+*** Equipments.
+
+** Decide on ethical issues.
+*** What to tell the participant.
+*** The 3 ethical things.
+*** Go to the ethical board.
+
+** Evaluate, interpret and present data.
+*** Depends on technique and paradigm.
+*** Reliablity : Can study be replicated?
+*** Validaity : is it measuring what it is interrpeted to measure.
+*** Biases : Is process bias?
+*** Scope : Does it apply to all users rather than just tester.
+*** Ecological : Validity -> Hawthorne effect.
+
+
+@endmindmap

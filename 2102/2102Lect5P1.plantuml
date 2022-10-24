@@ -1,0 +1,137 @@
+@startmindmap
+<style>
+mindmapDiagram {
+  rootNode  {
+    BackgroundColor lightGreen
+  }
+  boxless {
+    FontColor darkgreen
+  }
+  leafNode {
+    BackgroundColor lightBlue
+  }
+}
+</style>
+
+*  Evaluation
+** Definition
+*** Gather data of the usability of a design for a particular\n acivity by a specified group of users within a certain env
+** Goals
+
+*** Access extent of system functionality (Func)
+*** Access effect of interface on user (UI)
+*** Identify specific problem with system 
+** Formative vs Summative
+
+*** Formative
+**** Used when project is formming
+**** Done earlier, continuous, iterative
+**** "Evaluating design"
+
+*** Summative
+**** After a system has been finished
+**** Make judgement on final product
+**** Evaluating the implentation
+
+** Meothds
+
+*** Empiricial
+**** Real users and real data
+
+*** Formal
+**** HCI model
+***** Will be taught later by Nisha
+
+*** Automated 
+**** Google analyitics
+**** Measure how long a person take to click a button
+**** How long a person go back to a sight
+**** AB Testing?
+
+*** Predictive/Critique
+**** Expertise & Heuristic Feedback
+**** Someone's expertise.
+**** Examples
+***** Herusitic Evaluation
+***** COgntive
+***** Pluralistic Walkthrough(Not covered)
+
+
+* Empiricial
+** Done Real users and real data
+*** Verifiable or Provable 
+*** Qualitative ["User give their feelings"] \n Quatitative ["Error rate"]
+*** Early(Formative)
+**** Do with paper prototype
+*** Later(Summative)
+**** Out in the wild
+***** Mobile app and ask someone to use it \n (Not controlled env)
+**** Field studies
+**** UI on kiosk
+
+
+** Examples
+*** Lab studies
+**** Close lab setting
+**** Manipulate independent variable
+**** Compare experimental group with control group
+***** Old UI vs New UI
+**** Pros
+***** Replicable
+**** Cons
+***** Expensive (50/user sometimes)
+***** Req Real Users and Lab
+
+*** Field Studies(Out in the wild)
+**** Observation in real life setting
+**** Natural Env
+**** Watch process over time
+**** Pros
+***** Ecologically Valid (More realisitic)
+***** Cheap, quick, less training Required
+**** Cons
+***** Not Reproducible ( Cannot control env)
+***** Not quantitative (Cannot compare data )
+
+*** "THINK ALOUD"
+**** Ask user to think aloud while doing task
+**** Speak while completing task | issue | Confusion
+****  Evaulator Role
+***** Take note
+***** Conduct observation of the user
+***** Record vid | audio
+***** Analyze data
+**** Problem they may face.
+***** User may not think aloud whilst in a confused state
+****** Prompt user but not hint\n(Ask what are they confused about rather than given answer)
+** User Task
+*** Give something generic\nNOT Specific
+**** Give a goal or Objective
+**** Measures and question
+***** Time taken, Error mades, Success Rate
+
+
+* Heuristic Evaluation
+** Nelsen 10 Heuristic
+*** Need around 3 - 5 expert
+*** Evaluators Process
+**** Step through design several times
+**** Examine against heurisitc
+**** Fix problem | Redesign
+** Multiple Evalutors
+** Single = 35% of problem\n5 evaluator = 75%
+** Phases
+*** Pre-evaluation
+**** Give context or knowledge on scenario
+*** Evaluation
+**** Individual evaluate then aggregate results
+*** Severity Rating
+**** priority to fix
+*** Debrief
+****  Design team talk to evaluator to fix issue
+*** 2 passes for each evalutor
+**** first to get feel
+**** focus on finding issue
+
+
+@endmindmap

@@ -1,0 +1,45 @@
+@startmindmap
+<style>
+mindmapDiagram {
+  rootNode  {
+    BackgroundColor lightGreen
+  }
+  boxless {
+    FontColor darkgreen
+  }
+  leafNode {
+    BackgroundColor lightBlue
+  }
+}
+</style>
+
+* Goals Of Visual Design:
+** Guide
+*** Help users find their way. \n Convey structure, importance and relationships.
+** Pace
+*** Draws users in and oriented. 
+**** Right order and pace
+** Message
+*** Distinct look and feels.
+*** Express meaning and style.
+*** breathe life into the contents
+
+* Gestalt THEORY
+** When you look at something, you look at the entire\n thing before looking at the individual objects.
+** Explain how the eyes creates a whole from pars.
+*** Promixity
+**** objects close are more related that are furuther.
+*** Similiarity
+**** Elements with same characteristic would be grouped.
+*** Continuity.
+**** Element on line or curve, seen as related.
+*** Closure.
+**** Find pattern some how.
+*** Figure and background.
+**** Things are normally seen at the foreground or background but not middle.
+*** Symmetry.
+**** Makes it more pleasing to look at.
+*** Common fate
+**** Seen as the same group if seen together.
+
+@endmindmap
