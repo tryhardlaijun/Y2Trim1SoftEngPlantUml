@@ -33,13 +33,102 @@ mindmapDiagram {
 **** Elements with same characteristic would be grouped.
 *** Continuity.
 **** Element on line or curve, seen as related.
+**** People like to see continuous things rather than seperated.
 *** Closure.
-**** Find pattern some how.
+**** Find pattern some how which affect how the interpretted things.
+***** 4 Pac man -> 1 white square
+
 *** Figure and background.
 **** Things are normally seen at the foreground or background but not middle.
+**** The face and vase image.
+**** relative to size, the bigger than fore or background the more dominant it is.
+
 *** Symmetry.
 **** Makes it more pleasing to look at.
 *** Common fate
-**** Seen as the same group if seen together.
+**** Seen as the same group if seen togethe r.
 
+
+** Whitespace.
+*** Conveys grouping and relationships.
+*** Create balance and layout.
+*** Ease of reading.
+
+
+* Typography.
+** Point
+*** font size(point)
+**** Max height text can reach.
+*** Line height 
+**** Space given to the text, including padding on top and bottom.
+** Point size on different font may have different height.
+** Leading
+** X-height
+*** Affects ease of reading.
+** Ascender
+*** Anything above x (h, T)
+** Descender
+*** Anything below x (y , j)
+** Weight
+*** light regular or bold
+** Serif type font style
+*** Curly fonts
+** San Serif
+*** No curl
+** Kerning
+*** Overlap in space between character.
+*** Spacing between character.
+** Font Choices
+*** Common font for reading text.
+*** Logo or title use less common fonts(San-serif font).
+*** Mix and match serif and san-serf for contrast.
+*** Don't use too many font in 1 go.
+
+* How users read onlined 
+** They don't
+*** they scan the page.
+** People scan in the F shape.
+*** Read from left to right
+** Highest priority at top left.
+** Above the fold.
+*** Prime real estate.
+*** May not look below the fold.
+*** Should put the most important stuff at top.
+
+* Grids
+** Placement and alignment of all visual objects.
+** Help align 
+** Help scan quickly and avoid clutter.
+** Ensure all things are straight and align which guides the eye.
+** Rule of thirds 
+*** place item of interest in intersecting points\n 1/3 filled with 1 items at a 1 time.
+** Distribution of focus
+*** 41% -> 20 -> 25 -> 14
+** Tips
+*** Short element begin and end on grid boundry.
+*** Long element span multiple grid units.
+*** Align things into grid
+*** Visual Promity and scale
+**** If everything is along a line people see it as a group.
+*** Left aligned text.
+
+* Color THEORY
+** Analagous
+*** Color that a analogous or ajacent are usually go well together.
+** Complementary
+*** Color that are composite goes well with each other.
+** Can pair black and white with everything.
+** Hue color
+*** High contrast Complementary || Analagous less contrast
+** Avoid Highly saturated color.
+*** Use pastel color
+*** Use saturated to gain attention.
+*** MOstly black and white, then add splashes of color.
+** Color guidelines.
+*** Red -> Stop | BAD | error
+*** Green -> GOOD | OKAY | WORKIG.
+*** Use fewer colo, too many look clustered.
+*** Text on saturated color is harder to read/n Desaturated is easier.
+*** Design with monochrome then add a few splash of colors.
+ 
 @endmindmap
