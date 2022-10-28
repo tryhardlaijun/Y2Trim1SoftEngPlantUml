@@ -1,6 +1,4 @@
 @startuml
-skinparam classAttributeIconSize 0
-skinparam linetype ortho
 top to bottom direction
 
 'Interface
@@ -20,11 +18,11 @@ package "Cilent" as Cilent{
 }
 
 package "Server" as server{
-  Interface "Edit User" as EditUser
-  Interface "Update Job" as UpdateJob
+  Interface "Access User DB" as EditUser
+  Interface "Access Job DB" as UpdateJob
   Interface "Update Password" as UpdatePassword
-  Interface "Update Inventory" as UpdateInventory
-  Interface "Update StaffAvailabliy" as UpdateStaffAvailabliy
+  Interface "Access Inventory DB" as UpdateInventory
+  Interface "Access Availibility DB" as UpdateStaffAvailabliy
 
   package  "Business Layer" as Business {
     [Admin ] as Admin
@@ -33,6 +31,15 @@ package "Server" as server{
     [Job ] as Job
     [Inventory] as Inventory
     [Password] as Password
+    Admin -d-( EditUser
+    Staff -d-( EditUser
+    Manager -d-( EditUser
+    Staff -d-( UpdateStaffAvailabliy
+    Manager -d-( UpdateStaffAvailabliy
+    Job -d-( UpdateJob
+    Inventory -d-( UpdateInventory
+    Password -d-( UpdatePassword
+
 
   }
 
@@ -53,36 +60,43 @@ package "Server" as server{
 
 cloud "Restful API" as RestfulAPI{
 }
-Business <--->  Persistent
+' Business <-d->  Persistent
 
-Persistent <-> db
+' Persistent <-> db
 
 
-Interface "Request OTP" as OTP
+Interface "Generate OTP" as OTP
 Interface "Request" as HTTPRequest
 Interface "Response" as HTTPResponse
+Interface "Access Google Database" as AccessDB
+
+RestfulAPI -d- HTTPResponse
+RestfulAPI -u- HTTPRequest
+
+PasswordView -d-( HTTPRequest
+StaffView -d-( HTTPRequest
+AdminView -d-( HTTPRequest
+ManagerView -d-( HTTPRequest
 
 
-RestfulAPI -l- HTTPResponse
-RestfulAPI -r- HTTPRequest
+Admin  -u-( HTTPResponse
+Staff -u-( HTTPResponse
+Manager -u-( HTTPResponse
+Job -u-( HTTPResponse
+Inventory -u-( HTTPResponse
+Password -u-( HTTPResponse
 
-PasswordView -( HTTPRequest
-StaffView -( HTTPRequest
-AdminView -( HTTPRequest
-ManagerView -( HTTPRequest
-
-
-Admin  --( HTTPResponse
-Staff --( HTTPResponse
-Manager --( HTTPResponse
-Job --( HTTPResponse
-Inventory --( HTTPResponse
-Password --( HTTPResponse
+Password -u-( OTP
+Google -( OTP
 
 
+UserDAO -d-( AccessDB
+JobDAO -d-( AccessDB
+PasswordDAO -d-( AccessDB
+InventoryDAO -d-( AccessDB
+StaffAvailabilityDAO -d-( AccessDB
 
-
-
+db -u- AccessDB
 
 
 @enduml
