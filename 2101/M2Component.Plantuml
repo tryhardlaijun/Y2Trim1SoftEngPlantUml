@@ -8,14 +8,16 @@ top to bottom direction
 [Google Oauth] as Google #Pink
 database "Google DB" as db
 
-package "Presentation Layer"  as Presentation{
-  [Admin View] as AdminPage
-  [Staff View] as StaffPage
-  [Manager View] as ManagerPage
-  [Change Password View] as PasswordPage
+
+package  "Presentation Layer"  as Presentation{
+  [Change Password View] as PasswordView
+  [Admin View] as AdminView
+  [Staff View] as StaffView
+  [Manager View] as ManagerView
+
 }
 
-package "Business Layer" as Business {
+package  "Business Layer" as Business {
   [Admin Logic] as AdminLogic
   [Staff Logic] as StaffLogic
   [Manager Logic] as ManagerLogic
@@ -33,12 +35,14 @@ package "Persistent Layer" as Persistent {
   [Staff Availability] as StaffAvailability
 
 }
+cloud {
+  [Restful API] as Restful
+}
 
 
 
-
-Business <->  Presentation
-Business <->  Persistent
+Presentation <->  Business
+Business <---->  Persistent
 
 Persistent <-> db
 

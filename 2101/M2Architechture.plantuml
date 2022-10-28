@@ -5,11 +5,10 @@ top to bottom direction
 
 
 'Declaring things
-[Google Oauth] as Google #Pink
 database "Google DB" as db
 
 
-node  "Presentation Layer"  as Presentation{
+package  "Presentation Layer"  as Presentation{
   [Change Password View] as PasswordView
   [Admin View] as AdminView
   [Staff View] as StaffView
@@ -17,7 +16,7 @@ node  "Presentation Layer"  as Presentation{
 
 }
 
-node  "Business Layer" as Business {
+package  "Business Layer" as Business {
   [Admin Logic] as AdminLogic
   [Staff Logic] as StaffLogic
   [Manager Logic] as ManagerLogic
@@ -27,7 +26,7 @@ node  "Business Layer" as Business {
 
 }
 
-node "Persistent Layer" as Persistent {
+package "Persistent Layer" as Persistent {
   [User] as User
   [Job] as Job
   [Password] as Password
@@ -36,11 +35,13 @@ node "Persistent Layer" as Persistent {
 
 }
 
+cloud "Restful API" as RestfulAPI{
+}
 
 
-
-Presentation <->  Business
-Business <---->  Persistent
+Presentation <-d-> RestfulAPI
+Business <-d->  RestfulAPI
+Business <--->  Persistent
 
 Persistent <-> db
 
