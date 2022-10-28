@@ -6,32 +6,37 @@ top to bottom direction
 
 'Declaring things
 database "Google DB" as db
+[Google Oauth] as Google #Pink
 
+package "Cilent" as Cilent{
+  package  "Presentation Layer"  as Presentation{
+    [Change Password View] as PasswordView
+    [Admin View] as AdminView
+    [Staff View] as StaffView
+    [Manager View] as ManagerView
 
-package  "Presentation Layer"  as Presentation{
-  [Change Password View] as PasswordView
-  [Admin View] as AdminView
-  [Staff View] as StaffView
-  [Manager View] as ManagerView
-
+  }
 }
 
-package  "Business Layer" as Business {
-  [Admin Logic] as AdminLogic
-  [Staff Logic] as StaffLogic
-  [Manager Logic] as ManagerLogic
-  [Job Logic] as JobLogic
-  [Inventory Logic] as InventoryLogic
-  [Password Logic] as PasswordLogic
+package "Server" as server{
+  package  "Business Layer" as Business {
+    [Admin ] as Admin
+    [Staff ] as Staff
+    [Manager ] as Manager
+    [Job ] as Job
+    [Inventory] as Inventory
+    [Password] as Password
 
-}
+  }
 
-package "Persistent Layer" as Persistent {
-  [User] as User
-  [Job] as Job
-  [Password] as Password
-  [Inventory] as Inventory
-  [Staff Availability] as StaffAvailability
+  package "Persistent Layer" as Persistent {
+    [User DAO] as UserDAO
+    [Job DAO] as JobDAO
+    [Password DAO] as PasswordDAO
+    [Inventory DAO] as InventoryDAO
+    [Staff Availability DAO] as StaffAvailabilityDAO
+
+  }
 
 }
 
@@ -39,10 +44,17 @@ cloud "Restful API" as RestfulAPI{
 }
 
 
-Presentation <-d-> RestfulAPI
-Business <-d->  RestfulAPI
+Presentation <-r-> RestfulAPI
+RestfulAPI <-l->  Business
 Business <--->  Persistent
 
 Persistent <-> db
+
+
+Interface "Request OTP" as OTP
+Interface "HTTP Request" as HTTP
+
+'Google -- OTP
+'Password --( OTP
 
 @enduml
