@@ -1,0 +1,50 @@
+@startuml
+
+[User] as User 
+[Task Manager] as Management
+[Job] as Job
+[Password] as Password
+[Google Services] as Google #Pink
+[Inventory] as Inventory
+
+Interface "OTP" as OTP
+Interface "Change Password" as ChangePassword
+Interface "Edit database" as database 
+Interface "Job Details" as JobDetails 
+Interface "Retrieve Info" as RetrieveInfo
+Interface "Assign User" as Assign
+
+Google -- OTP
+OTP )-- Password
+
+Google -- RetrieveInfo
+RetrieveInfo )-- Management
+RetrieveInfo )-- Job
+
+Password -- ChangePassword
+ChangePassword )-- User
+
+Job -- JobDetails
+Inventory -- InventoryDetail
+User -- UserDetail
+
+InventoryDetail )-- Management
+
+UserDetail )-- Management
+
+Google -- database
+database )-- User   
+database )-- Password
+database )-- Management
+
+
+JobDetails )-- User
+JobDetails )-- Management
+
+User -- Assign
+Assign )-- Management
+
+
+
+
+@enduml

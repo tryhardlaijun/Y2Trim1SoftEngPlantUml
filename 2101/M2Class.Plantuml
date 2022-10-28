@@ -1,0 +1,254 @@
+left to right direction
+
+
+class Admin as "<<entity>>\nAdmin"{
+ -adminID:Integer
+ +getAdminID():Integer
+ +setAdminID():Void
+}
+
+class AdminController as "<<Control>>\nAdminController"{
+ +editUser():Void
+ +addUser():Void
+ +deleteUser():Void
+ +viewAllStaff():Void
+}
+
+
+class User as "<<entity>>\nUser"{
+ -name:String
+ -email:String
+ -maskedNRIC:String
+ -jobTitle:String
+ -phone_Number:String
+ -starting_Date:String
+ +getName():String
+ +setName():Void
+ +getEmail():String
+ +setEmail():Void
+ +getMaskedNRIC():String
++setMaskedNRIC():Void
+ +getJobTitle():String
+ +setJobTitle():Void
+ +getPhone_Number():String
+ +setPhone_Number():Void
+ +getStarting_Date():String
+ +setStarting_Date():Void
+}
+
+
+
+class Manager as "<<entity>>\nManager"{
+ -managerID:Integer
+ +getManagerID():Integer
+ +setManagerID():Void
+
+}
+
+
+
+class JobManagement as "<<Control>>\n JobManagement"{
+ +assignJobAssignments():void
+ +acceptRejection():Void
+ +rejectRejection():Void
+ +editJobAssignments():Void
+
+}
+class VanManagement as "<<Control>>\nVanManagement "{
+ +addServicingVan():Void
+ +addAvailableVan():Void
+ +viewAllVans():Void
+}
+class StaffManagement as "<<Control>>\nStaffManagement "{
+ +viewAvailablity():Void
+ +viewQualification():Void
+}
+
+class Staff as "<<entity>>\nStaff"{
+ -staffID:Integer
+ +getStaffID():Integer
+ +setStaffID():Void
+ -qualification:ArrayList<String>
+ +getQualification():ArrayList<String>
+ +setQualification():Void
+}
+
+class StaffController as "<<Control>>\nStaffController"{
+ +viewAvailability():void
+ +requestRejection():void
+ +editJobPreference():void
+ +editAvailability():void
+ +applyLeave():void
+
+}
+
+class Job as "<<entity>>\nJob" {
+ -jobID:Integer
+ -getDate:Date
+ -getTime:Time
+ +getJobID():Integer
+ +setJobID():Void
+ +getGetDate():Date
+ +setGetDate():Void
+ +getGetTime():Time
+ +setGetTime():Void
+}
+
+class JobController as "<<Control>>\nJobController" {
+ +viewStaffAssigned():ArrayList<Staff>
+}
+
+
+class JobCalendar as "<<Entity>>\nJobCalendar"{
+  -listOfJob:ArrayList<String>
+  +getLisOfJob():ArrayList<String>
+  +setListOfJob():Void
+}
+class JobCalendarController as "<<Control>>\nJobCalendarController"{
+
+ +RetrieveInfoFromGoogle():ArrayList<String>
+}
+
+class JobCalendarInterface as "<<Interface>>\nJobInterface"{
+ +showAvailable(User user):ArrayList<String>
+ +showJobAssignments(User user):ArrayList<String>
+ +EditJobAssignmentByNumber(int):Void (??)
+}
+
+class PasswordController as "<<Control>>\nPasswordController"{
+ +requestOTP():Void
+ +editDataBase():Void
+}
+
+class PasswordInterface as "<<Interface>>\nChangePassword"{
+ +editPassword():Void
+}
+
+
+class Van as "<<Entity>>\nVan"{
+-vanStatus:String
+-vanPlateNumber:Int
+-isMaintenance:Bool
+}
+
+class Password as ""<<Entity>>\nPassword"{
+ -EncrpytedPassword:String
+  +getEncrpyted_Password():String
+  +setEncrpyted_Password():Voids
+}
+
+
+User <|---- Manager
+User <|-- Admin
+User <|-- Staff
+
+
+
+Job "*"----o "1..3" Staff : Assigned
+Job "*" ----o "  0..*   " Staff : Preference
+
+Staff <. StaffController : Uses
+Staff <.. JobManagement : Uses
+
+Manager <.. JobManagement : Uses
+Manager <.. VanManagement : Uses
+Manager <.. StaffManagement : Uses
+Manager "*" --o "*" Van : Manages
+
+Van <.. VanManagement : Uses
+
+Admin <.. AdminController : Uses
+
+JobController  .> Job : Uses
+
+JobCalendarController  .> JobCalendar : Uses
+
+PasswordController  .> Password : Uses
+PasswordInterface .> PasswordController: Uses
+
+
+Job "*" -- "*" Manager : Assigns
+Job -o JobCalendar
+Job  <. JobManagement : Uses
+
+
+
+JobCalendar - Staff
+JobCalendar - Manager
+JobCalendar <.. JobCalendarInterface : Uses
+Password -* User
+
+
+class JobBoundary1x as "<<Boundary>>\nViewStaffAssigned"{
+}
+JobController <.. JobBoundary1x : Uses
+
+
+class StaffBoundary1x as "<<Boundary>>\nViewAvailability"{
+}
+class StaffBoundary2x as "<<Boundary>>\nRequestRejection"{
+}
+class StaffBoundary3x as "<<Boundary>>\nEditAvailability"{
+}
+class StaffBoundary4x as "<<Boundary>>\nEditJobPreference"{
+}
+class StaffBoundary5x as "<<Boundary>>\nEditAvailability"{
+}
+class StaffBoundary6x as "<<Boundary>>\nApplyLeave"{
+}
+StaffController <.. StaffBoundary1x : Uses
+StaffController <.. StaffBoundary2x : Uses
+StaffController <.. StaffBoundary3x : Uses
+StaffController <.. StaffBoundary4x : Uses
+StaffController <.. StaffBoundary5x : Uses
+StaffController <.. StaffBoundary6x : Uses
+
+class StaffBoundary1 as "<<Boundary>>\nViewAvailablity"{
+}
+class StaffBoundary2 as "<<Boundary>>\nViewQualification"{
+}
+StaffManagement <.. StaffBoundary1 : Uses
+StaffManagement <.. StaffBoundary2 : Uses
+
+
+class AdminBoundary1 as "<<Boundary>>\nEditUser"{
+}
+class AdminBoundary2 as "<<Boundary>>\nAddUser"{
+}
+class AdminBoundary3 as "<<Boundary>>\nDeleteUser"{
+}
+class AdminBoundary4 as "<<Boundary>>\nViewAllUser"{
+}
+AdminController <.. AdminBoundary1 : Uses
+AdminController <.. AdminBoundary2 : Uses
+AdminController <.. AdminBoundary3 : Uses
+AdminController <.. AdminBoundary4 : Uses
+
+
+class JobBoundary1 as "<<Boundary>>\nAssignJobAssignments"{
+}
+class JobBoundary2 as "<<Boundary>>\nAcceptRejection"{
+}
+class JobBoundary3 as "<<Boundary>>\nRejectRejection"{
+}
+class JobBoundary4 as "<<Boundary>>\nEditJobAssignments"{
+}
+JobManagement <.. JobBoundary1 : Uses
+JobManagement <.. JobBoundary2 : Uses
+JobManagement <.. JobBoundary3 : Uses
+JobManagement <.. JobBoundary4 : Uses
+
+class VanBoundary1 as "<<Boundary>>\nAddServicingVan"{
+}
+class VanBoundary2 as "<<Boundary>>\nAddAvailableVan"{
+}
+class VanBoundary3 as "<<Boundary>>\nViewAllVans"{
+}
+
+VanManagement <.. VanBoundary1 : Uses
+VanManagement <.. VanBoundary2 : Uses
+VanManagement <.. VanBoundary3 : Uses
+
+
+
+

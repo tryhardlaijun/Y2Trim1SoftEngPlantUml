@@ -1,0 +1,47 @@
+@startuml
+skinparam classAttributeIconSize 0
+skinparam linetype ortho
+top to bottom direction
+
+
+'Declaring things
+[Google Oauth] as Google #Pink
+database "Google DB" as db
+
+
+node  "Presentation Layer"  as Presentation{
+  [Change Password View] as PasswordView
+  [Admin View] as AdminView
+  [Staff View] as StaffView
+  [Manager View] as ManagerView
+
+}
+
+node  "Business Layer" as Business {
+  [Admin Logic] as AdminLogic
+  [Staff Logic] as StaffLogic
+  [Manager Logic] as ManagerLogic
+  [Job Logic] as JobLogic
+  [Inventory Logic] as InventoryLogic
+  [Password Logic] as PasswordLogic
+
+}
+
+node "Persistent Layer" as Persistent {
+  [User] as User
+  [Job] as Job
+  [Password] as Password
+  [Inventory] as Inventory
+  [Staff Availability] as StaffAvailability
+
+}
+
+
+
+
+Presentation <->  Business
+Business <---->  Persistent
+
+Persistent <-> db
+
+@enduml
