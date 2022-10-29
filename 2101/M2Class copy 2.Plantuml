@@ -1,0 +1,245 @@
+@startuml
+
+class User as "<<entity>>\nUser"{
+ -name:String
+ -email:String
+ -maskedNRIC:String
+ -jobTitle:String
+ -phone_Number:String
+ -starting_Date:String
+ +getName():String
+ +setName():Void
+ +getEmail():String
+ +setEmail():Void
+ +getMaskedNRIC():String
++setMaskedNRIC():Void
+ +getJobTitle():String
+ +setJobTitle():Void
+ +getPhone_Number():String
+ +setPhone_Number():Void
+ +getStarting_Date():String
+ +setStarting_Date():Void
+}
+
+class Staff as "<<entity>>\nStaff"{
+ -staffID:Integer
+ +getStaffID():Integer
+ +setStaffID():Void
+ -qualification:ArrayList<String>
+ +getQualification():ArrayList<String>
+ +setQualification():Void
+}
+
+class Admin as "<<entity>>\nAdmin"{
+ -adminID:Integer
+ +getAdminID():Integer
+ +setAdminID():Void
+}
+
+class Manager as "<<entity>>\nManager"{
+ -managerID:Integer
+ +getManagerID():Integer
+ +setManagerID():Void
+}
+
+class Job as "<<entity>>\nJob" {
+ -jobID:Integer
+ -getDate:Date
+ -getTime:Time
+ +getJobID():Integer
+ +setJobID():Void
+ +getGetDate():Date
+ +setGetDate():Void
+ +getGetTime():Time
+ +setGetTime():Void
+
+}
+
+class Van as "<<Entity>>\nVan"{
+-vanStatus:String
+-vanPlateNumber:Int
+-isMaintenance:Bool
++getVanStatus():String
++getVanPlateNumber():Int
++getVanStatus():Bool
++setVanStatus():Void
++setVanPlateNumber():Void
++setIsMaintenance():Void
+}
+
+class JobAssignments as "<<entity>>\nJobAssignments"
+{
+   -AssignedStaff:ArrayList<User>
+   -Preferences:ArrayList<User>
+   +getSetAssignedStaff():ArrayList<User>
+   +setAssignedStaff():Void
+   +getPerferences():ArrayList<User>
+   +setPerferences():Void
+}
+class Password as "<<Entity>>\nPassword"{
+  -EncrpytedPassword:String
+  +getEncrpyted_Password():String
+  +setEncrpyted_Password():Void
+}
+class StaffAvailability as "<<Entity>>\nStaffAvailability"{
+  -StaffAvailability:ArrayList<Date>
+  +getStaffAvailability():ArrayList<Date>
+  +setStaffAvailability():Void
+}
+class StaffRequest as "<<Entity>>\nStaffRequest"{
+  -StaffPreference:ArrayList<Job>
+  -StaffRejection:ArrayList<Job>
+  -StaffLeaveRequest:ArrayList<Date>
+  +getStaffPreference():ArrayList<Date>
+  +setStaffPreference():Void
+  +getStaffRejection():ArrayList<Job>
+  +setStaffRejection():Void
+  +getStaffLeaveRequest():ArrayList<Date>
+  +setStaffLeaveRequest():Void
+
+}
+
+'DAO
+class DAO as "<<Interface>>\nIDAO" {
+  get():T(Template CLass)
+  getAll():ArrayList<<T>>(Template CLass)
+  save():void
+  update():Void
+  delete():Void
+}
+class JobDAO as "<<Control>>\nJobDAO" {
+
+}
+class StaffAvailabilityDAO as "<<Control>>\nStaffAvailabilityDAO" {
+
+}
+class  UserDAO as "<<Control>>\nUserDAO" {
+
+}
+class PasswordDAO as "<<Control>>\nPasswordDAO" {
+
+}
+class StaffAvailabilityDAO as "<<Control>>\nStaffAvailabilityDAO" {
+
+}
+
+'Controller' class
+class LoginController as "<<Control>>\n Authenication" {
+  +DisplayDashboard():void
+  +DisplayFailedLogin():void
+}
+
+class ILoginController as "<<Interface>>\nILogin"{
+  +AuthenicateCredential()
+}
+
+class AccountController as "<<Control>>\nAccountController"{
+  +DisplaySuccess()
+  +DisplayFailure()
+}
+
+class IAccountController as "<<Interface>>\IAccountManagement"{
+  +editUser():Void
+  +addUser():Void
+  +deleteUser():Void
+  +viewAllUser():Void
+}
+
+class PasswordController as "<<Control>>\nPasswordController"{
+  +reviewPassword():void
+}
+class IPasswordController as "<<Interface>>\nIPasswordController"{
+  +requestOTP():Void
+  +authenticate():Bool
+  +updatePassword():void
+}
+
+class VanController as "<<Control>>\nVanController"{
+  +countTotalVans():int
+}
+class IVanController as "<<interface>>\nIVanController"{
+  +editIsMaintenance():void
+  +addAvailableVan():Void
+  +viewAllVans():Void
+}
+
+class JobManagement as "<<Control>>\nJobManagement"{
+
+  +banRejection():Void
+}
+class IJobManagement as "<<Interface>>\nIJobManagement"{
+  +AssignJob():Void
+  +EditJobAssignment():Void
+  +UpdatePerference():Void
+  +acceptRejection():Void
+  +rejectRejection():Void
+  +applyRejection():Void
+  +editRejection():Void
+}
+
+class ScheduleManager as "<<Control>>\nScheduleManager"{
+  +updateAvailability():Void
+}
+class IScheduleManager as "<<interface>>\nIScheduleManager"{
+  +AcceptLeave():Void
+  +ApplyLeave():Void
+  +getStaffAvailability():ArrayList<Date>
+  +viewAvailability():void
+  +editAvailability():void
+}
+' Inheritance
+User <|-- Staff
+User <|-u- Manager
+User <|- Admin
+
+'Association
+' Manager -- Van : Manages
+' Manager -- JobAssignments : Assign
+
+'Aggregation
+JobAssignments "*" o-- "*" Staff : Show perference
+
+' Composite
+User  *--  Password
+Job  *-- JobAssignments
+Staff  *-- StaffAvailability
+Staff *-- StaffRequest
+
+' Dependency
+Admin <. AccountController : uses
+User <. AccountController : uses
+User <. PasswordController : uses
+Password <. PasswordController : uses
+Van <. VanController : uses
+Manager <.u. VanController : uses
+Manager <.l. ScheduleManager : uses
+StaffRequest <.. ScheduleManager : uses
+Staff <.u. ScheduleManager : uses
+Manager <.u. JobManagement : uses
+Staff <.d. JobManagement  : uses
+StaffRequest <.r. JobManagement :uses
+Job <.. JobManagement :uses
+User <. LoginController :uses
+'DAO Dependecy
+
+DAO <.l. StaffAvailabilityDAO : uses
+DAO <.r. PasswordDAO  : uses
+DAO <.u. UserDAO  : uses
+DAO <.d. JobDAO  : uses
+DAO <.d. VanDAO  : uses
+
+LoginController <. UserDAO :uses
+AccountController <.  UserDAO : uses
+PasswordController <. PasswordDAO : uses
+ScheduleManager <. StaffAvailabilityDAO  : uses
+JobManagement <. JobDAO : uses
+VanController <. VanDAO : uses
+
+LoginController <. ILoginController
+AccountController <. IAccountController
+PasswordController <. IPasswordController
+VanController <. IVanController
+ScheduleManager <. IScheduleManager
+JobManagement <. IJobManagement
+
+@enduml

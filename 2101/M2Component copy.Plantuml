@@ -15,8 +15,10 @@ package "Cilent" as Cilent{
     Interface "Admin UI" as AdminUI
     Interface "Staff UI" as StaffUI
     Interface "Manager UI" as ManagerUI
+    Interface "Login UI" as LoginUI
 
     [Base View] as BasicView
+    [Login View] as LoginView
     [Change Password View] as PasswordView
     [Admin View] as AdminView
     [Staff View] as StaffView
@@ -26,12 +28,13 @@ package "Cilent" as Cilent{
     PasswordView -u- PasswordUI
     StaffView -u- StaffUI
     ManagerView -u- ManagerUI
+    LoginView -u- LoginUI
 
     BasicView -d-( AdminUI
     BasicView -d-( PasswordUI
     BasicView -d-( StaffUI
     BasicView -d-( ManagerUI
-
+    BasicView -d-( LoginUI
     BasicView -u- UserInterface
 
 
@@ -39,40 +42,36 @@ package "Cilent" as Cilent{
 }
 
 package "Server" as server{
-  Interface "Access User DB" as EditUser
-  Interface "Access Job DB" as UpdateJob
-  Interface "Update Password" as UpdatePassword
-  Interface "Access Inventory DB" as UpdateInventory
-  Interface "Access Availibility DB" as UpdateStaffAvailabliy
+  Interface "IDAO" as accessDAO 
 
   package  "Business Layer" as Business {
-    [Admin ] as Admin
-    [Staff ] as Staff
-    [Manager ] as Manager
-    [Job ] as Job
-    [Inventory] as Inventory
-    [Password] as Password
-    Admin -d-( EditUser
-    Staff -d-( EditUser
-    Manager -d-( EditUser
-    Staff -d-( UpdateStaffAvailabliy
-    Manager -d-( UpdateStaffAvailabliy
-    Job -d-( UpdateJob
-    Inventory -d-( UpdateInventory
-    Password -d-( UpdatePassword
+    [AccountController ] as Admin
+    [LoginController ] as Staff
+    [ScheduleManager ] as Manager
+    [JobManagement ] as Job
+    [VanController] as Van
+    [PasswordController] as Password
+    Admin -d-( accessDAO
+    Staff -d-( accessDAO
+    Manager -d-( accessDAO
+    Job -d-( accessDAO
+    Van -d-( accessDAO
+    Password -d-( accessDAO
+
+
   }
 
   package "Persistent Layer" as Persistent {
     [User DAO] as UserDAO
     [Job DAO] as JobDAO
     [Password DAO] as PasswordDAO
-    [Inventory DAO] as InventoryDAO
+    [Van DAO] as VanDAO
     [Staff Availability DAO] as StaffAvailabilityDAO
-    UserDAO -u- EditUser
-    JobDAO -u- UpdateJob
-    PasswordDAO -u- UpdatePassword
-    InventoryDAO -u- UpdateInventory
-    StaffAvailabilityDAO -u- UpdateStaffAvailabliy
+    UserDAO -u- accessDAO
+    JobDAO -u- accessDAO
+    PasswordDAO -u- accessDAO
+    VanDAO -u- accessDAO
+    StaffAvailabilityDAO -u- accessDAO
   }
 
 }
@@ -93,27 +92,27 @@ PasswordView --d-( HTTPRequest
 StaffView -d-( HTTPRequest
 AdminView -d-( HTTPRequest
 ManagerView -d-( HTTPRequest
+LoginView -d-( HTTPRequest
 
-
-Interface "IManager" as IManager
-Interface "IStaff" as IStaff
-Interface "IAdmin" as IAdmin
-Interface "IJob" as IJob
-Interface "IPassword" as IPassword
-Interface "IInventory" as IInventory
+Interface "IScheduleManager" as IManager
+Interface "ILoginController" as IStaff
+Interface "IAccountController" as IAdmin
+Interface "IJobManagement" as IJob
+Interface "IPasswordController" as IPassword
+Interface "IVanController" as IVan
 
 Admin  -u- IAdmin
 Staff -u- IStaff
 Manager -u- IManager
 Job -u- IJob
-Inventory -u- IInventory
+Van -u- IVan
 Password -u- IPassword
 
 RestfulAPI  -d-( IAdmin
 RestfulAPI -d-( IStaff
 RestfulAPI -d-( IManager
 RestfulAPI -d-( IJob
-RestfulAPI -d-( IInventory
+RestfulAPI -d-( IVan
 RestfulAPI -d-( IPassword
 
 
@@ -124,7 +123,7 @@ Google -u- OTP
 UserDAO -d-( AccessDB
 JobDAO -d-( AccessDB
 PasswordDAO -d-( AccessDB
-InventoryDAO -d-( AccessDB
+VanDAO -d-( AccessDB
 StaffAvailabilityDAO -d-( AccessDB
 
 db -u- AccessDB

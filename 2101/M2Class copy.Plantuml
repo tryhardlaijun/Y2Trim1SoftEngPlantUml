@@ -55,6 +55,18 @@ class Job as "<<entity>>\nJob" {
 
 }
 
+class Van as "<<Entity>>\nVan"{
+-vanStatus:String
+-vanPlateNumber:Int
+-isMaintenance:Bool
++getVanStatus():String
++getVanPlateNumber():Int
++getVanStatus():Bool
++setVanStatus():Void
++setVanPlateNumber():Void
++setIsMaintenance():Void
+}
+
 class JobAssignments as "<<entity>>\nJobAssignments"
 {
    -AssignedStaff:ArrayList<User>
@@ -67,12 +79,12 @@ class JobAssignments as "<<entity>>\nJobAssignments"
 class Password as "<<Entity>>\nPassword"{
   -EncrpytedPassword:String
   +getEncrpyted_Password():String
-  +setEncrpyted_Password():Voids
+  +setEncrpyted_Password():Void
 }
-class StaffAvailability as "<<Entity>>\nPassword"{
-  -EncrpytedPassword:String
-  +getEncrpyted_Password():String
-  +setEncrpyted_Password():Voids
+class StaffAvailability as "<<Entity>>\nStaffRequest"{
+  -StaffAvailability:ArrayList<Date>
+  +getStaffAvailability():ArrayList<Date>
+  +setStaffAvailability():Void
 }
 
 'Controller' class
@@ -82,19 +94,91 @@ class AdminController as "<<Control>>\nAdminController"{
  +deleteUser():Void
  +viewAllStaff():Void
 }
+class ManagerController as "<<Control>>\nManagerController"{
+  +viewStaffAvailability():ArrayList<Date>
+  +viewQualification():ArrayList<String>
+  +AssignJob():Void
+  +setRejectionRequest():Void
+  +EditJobAssignment():Void
+  +AddVan():Void
+}
+class StaffController as "<<Control>>\nStaffController"{
+ +viewAvailability():void
+ +requestRejection():void
+ +editJobPreference():void
+ +editAvailability():void
+}
+class PasswordController as "<<Control>>\nPasswordController"{
+  +requestOTP():Void
+  +authenticate():OTP
+}
 
 
+' Data Access Object
+class AdminUserDataAcess as "<<Control>>\nAdminUserDataAcess"{
+  +get(String UserID):User
+  +getAll():ArrayList<User>
+  +update(ArrayList<User>)
+  
+}
+class ManagerUserDataAcess as "<<Control>>\nManagerUserDataAcess"{
+  +get(String UserID):User
+  +getAll():ArrayList<User>
+  
+}
+class StaffUserDataAcess as "<<Control>>\nStaffUserDataAcess"{
+  +get(String UserID):User
+}
+class JobDataAcess as "<<Control>>\nJobDataAcess"{
+  +get(String JobID):Job
+  +getAll():ArrayList<Job>
+  +update(ArrayList<Job>)
+  
+}
+class PasswordDataAcess as "<<Control>>\nPasswordDataAcess"{
+  +update(Password String)
+}
+class InventoryDataAcess as "<<Control>>\nInventoryDataAcess"{
+  +get(String VanID):Van
+  +getAll():ArrayList<Van>
+  +update(ArrayList<Van>)
+  
+}
+class StaffAvailabilityDataAcess as "<<Control>>\nStaffAvailabilityDataAcess"{
+  +get(String UserID):ArrayList<DateTime>
+  +update(ArrayList<DateTime>)
+  
+}
 ' Inheritance
-User <|-- Staff
-User <|-- Manager
-User <|-- Admin
+User <|-l- Staff
+User <|-u- Manager
+User <|- Admin
+
+'Association
+
 
 'Aggregation
-JobAssignments -- Manager : Assigns
 JobAssignments o-- Staff : Show perference
+Staff *-- StaffAvailability
 
 ' Composite
-User *-l- Password
+User *-- Password
 Job *-- JobAssignments
+
+' Dependency
+Admin <. AdminController : uses
+Manager <. ManagerController : uses
+Staff <. StaffController : uses
+Password <. PasswordController : uses
+
+'Dependency DataAcess
+Job <. JobDataAcess : uses
+Manager <. StaffAvailabilityDataAcess : uses
+Staff <. StaffAvailabilityDataAcess : uses
+Manager <. ManagerUserDataAcess :Use
+Staff <. StaffUserDataAcess : uses
+Admin <. AdminUserDataAcess : uses
+Manager <. InventoryDataAcess : uses
+Password <.l. PasswordDataAcess : uses
 
 @enduml
