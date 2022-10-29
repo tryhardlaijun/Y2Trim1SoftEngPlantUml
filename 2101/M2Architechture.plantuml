@@ -6,7 +6,6 @@ top to bottom direction
 
 'Declaring things
 database "Google DB" as db
-[Google Oauth] as Google #Pink
 
 package "Cilent" as Cilent{
   package  "Presentation Layer"  as Presentation{
@@ -50,9 +49,6 @@ Business <--->  Persistent
 
 Persistent <-> db
 
-
-Interface "Request OTP" as OTP
-Interface "HTTP Request" as HTTP
 
 'Google -- OTP
 'Password --( OTP

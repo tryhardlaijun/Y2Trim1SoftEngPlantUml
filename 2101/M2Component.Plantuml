@@ -8,11 +8,32 @@ database "Google DB" as db
 [Google Oauth] as Google #Pink
 
 package "Cilent" as Cilent{
+  
   package  "Presentation Layer"  as Presentation{
+    Interface "Basic UI" as UserInterface
+    Interface "Password UI" as PasswordUI
+    Interface "Admin UI" as AdminUI
+    Interface "Staff UI" as StaffUI
+    Interface "Manager UI" as ManagerUI
+
+    [Base View] as BasicView
     [Change Password View] as PasswordView
     [Admin View] as AdminView
     [Staff View] as StaffView
     [Manager View] as ManagerView
+
+    AdminView -u- AdminUI
+    PasswordView -u- PasswordUI
+    StaffView -u- StaffUI
+    ManagerView -u- ManagerUI
+
+    BasicView -d-( AdminUI
+    BasicView -d-( PasswordUI
+    BasicView -d-( StaffUI
+    BasicView -d-( ManagerUI
+
+    BasicView -u- UserInterface
+
 
   }
 }
@@ -67,27 +88,39 @@ cloud "Restful API" as RestfulAPI{
 
 Interface "Generate OTP" as OTP
 Interface "Request" as HTTPRequest
-Interface "Response" as HTTPResponse
 Interface "Access Google Database" as AccessDB
 
-RestfulAPI -d- HTTPResponse
 RestfulAPI -u- HTTPRequest
-
-PasswordView -d-( HTTPRequest
+PasswordView --d-( HTTPRequest
 StaffView -d-( HTTPRequest
 AdminView -d-( HTTPRequest
 ManagerView -d-( HTTPRequest
 
 
-Admin  -u-( HTTPResponse
-Staff -u-( HTTPResponse
-Manager -u-( HTTPResponse
-Job -u-( HTTPResponse
-Inventory -u-( HTTPResponse
-Password -u-( HTTPResponse
+Interface "IManager" as IManager
+Interface "IStaff" as IStaff
+Interface "IAdmin" as IAdmin
+Interface "IJob" as IJob
+Interface "IPassword" as IPassword
+Interface "IInventory" as IInventory
 
-Password -u-( OTP
-Google -( OTP
+Admin  -u- IAdmin
+Staff -u- IStaff
+Manager -u- IManager
+Job -u- IJob
+Inventory -u- IInventory
+Password -u- IPassword
+
+RestfulAPI  -d-( IAdmin
+RestfulAPI -d-( IStaff
+RestfulAPI -d-( IManager
+RestfulAPI -d-( IJob
+RestfulAPI -d-( IInventory
+RestfulAPI -d-( IPassword
+
+
+Password -d-( OTP
+Google -u- OTP
 
 
 UserDAO -d-( AccessDB
